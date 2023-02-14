@@ -26,6 +26,7 @@ describe('Park', function() {
   it('should have a name', function(){
     const actual = park.name;
     assert.strictEqual(actual, 'Jurassic Park');
+    console.log(dinosaur_collection)
   });
 
   it('should have a ticket price', function(){
@@ -42,7 +43,7 @@ describe('Park', function() {
 
   it('should be able to add a dinosaur to its collection', function(){
     park.add_dinosaur(dino3);
-    const actual = (park.dinosaur_collection.length); // could also count length of array
+    const actual = (park.dinosaur_collection.length);
     assert.deepStrictEqual(actual, 3)
   });
 
@@ -52,15 +53,36 @@ describe('Park', function() {
     assert.deepStrictEqual(actual, 1)
   });
 
-  it('should be able to find the dinosaur that attracts the most visitors');
+  it('should be able to find the dinosaur that attracts the most visitors', function(){
+    const actual = park.mostVisitors();
+    assert.strictEqual(actual, 186);
+  });
 
-  it('should be able to find all dinosaurs of a particular species');
+  it('should be able to find all dinosaurs of a particular species', function(){;
+    park.add_dinosaur(dino1);
+    park.add_dinosaur(dino1);
+    park.add_dinosaur(dino1);
+    park.add_dinosaur(dino1);
+    const actual = park.findSpecies('Tyrannosaurus').length;
+    assert.strictEqual(actual, 5)
+  });
 
-  it('should be able to calculate the total number of visitors per day');
+  it('should be able to calculate the total number of visitors per day', function(){
+    const actual = park.totalVisitorsPerDay();
+    assert.strictEqual(actual, 280)
+  });
 
-  it('should be able to calculate the total number of visitors per year');
+  it('should be able to calculate the total number of visitors per year', function(){
+    const actual = park.totalVisitorsPerDay() * 365; // no taking into account leap years
+    assert.strictEqual(actual, 102200)
+  });
 
-  it('should be able to calculate total revenue for one year');
+
+  it('should be able to calculate total revenue for one year', function(){
+    const visitorsPerYear = park.totalVisitorsPerDay() * 365;
+    const actual = visitorsPerYear * ticket_price;
+    assert.strictEqual(actual, 1533000000)
+  });
 
   }) 
 
